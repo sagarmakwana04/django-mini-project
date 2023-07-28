@@ -1,0 +1,41 @@
+{% extends 'header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tops Web Application</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <center>
+        <h1>Contact</h1>
+            {% if msg %}
+                <b style="color: rgb(0, 126, 6);">{{msg}}</b>     
+            {% endif %}
+            <form method="post" action="{% url 'contact' %}">
+                {% csrf_token %}
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name"><br><br>
+
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email"><br><br>
+
+                <label for="mobile">Mobile:</label>
+                <input type="number" name="mobile" id="mobile"><br><br>
+
+                <label for="remarks">Remarks:</label>
+                <textarea name="remarks" id="remarks" cols="30" rows="10"></textarea><br><br>
+
+                <button type="submit" value="submit" class="btn btn-primary">Submit</button>
+            </form>
+    </center>
+    <h1>Recent Contacts</h1>
+    <hr>
+    {% for i in contacts %}    
+        Name : {{i.name}} <br>
+        Remarks : {{i.remarks}} <br><hr>
+    {% endfor %}
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tops Web Application</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <center>
+        <h1>Profile</h1>
+            {% if msg %}
+                <b style="color: green;">{{msg}}</b>     
+            {% endif %}
+            <form method="post" action="{% url 'profile' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="fname">First Name:</label>
+                <input type="text" name="fname" id="fname" value="{{user.fname}}"><br><br>
+
+                <label for="lname">Last Name:</label>
+                <input type="text" name="lname" id="lname" value="{{user.lname}}"><br><br>
+
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" value="{{user.email}}" readonly><br><br>
+
+                <label for="mobile">Mobile:</label>
+                <input type="number" name="mobile" id="mobile" value="{{user.mobile}}"><br><br>
+
+                <label for="address">Address:</label>
+                <textarea name="address" id="address" cols="30" rows="10">{{user.address}}</textarea><br><br>
+                
+                <label for="gender">Gender</label>
+                    {% if user.gender == "male" %}
+                        <input type="radio" name="gender" id="male" value="male" checked>Male
+                        <input type="radio" name="gender" id="female" value="female" >Female <br><br>
+                    {% elif user.gender == "female" %}
+                        <input type="radio" name="gender" id="male" value="male" >Male
+                        <input type="radio" name="gender" id="female" value="female" checked>Female <br><br>
+                    {% endif %}
+
+                <label>Profile Picture</label>
+                <input type="file" name="profile_pic">
+
+                <button type="submit" value="signup" class="btn btn-primary">Sign Up</button>
+            </form>
+</body>
+</html>
+{% endblock %}
